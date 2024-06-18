@@ -147,6 +147,23 @@ article:hover::after {
 
 .login-box .user-box {
   position: relative;
+  display: flex;
+}
+
+.login-box button {
+  position: relative;
+  display: inline-block;
+  padding: 1px 2px;
+  font-weight: bold;
+  color: #fff;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  background: #44008846;
+  border-radius: 5px;
+  outline: none;
+  cursor: pointer;
+  transition: all.3s ease;
 }
 
 .login-box .user-box input {
