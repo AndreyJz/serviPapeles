@@ -168,6 +168,7 @@ article:hover::after {
 
 .login-box .user-box input {
   width: 100%;
+  pointer-events: none;
   padding: 10px 0;
   font-size: 16px;
   color: #fff;
@@ -190,7 +191,8 @@ article:hover::after {
 }
 
 .login-box .user-box input:focus ~ label,
-.login-box .user-box input:valid ~ label {
+.login-box .user-box input:valid ~ label, 
+  .login-box .user-box input:not(:empty) ~ label {
   top: -20px;
   left: 0;
   color: #fff;
