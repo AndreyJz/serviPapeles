@@ -5,17 +5,127 @@
 }
 
 body {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: black;
+  margin: 0;
+  overflow-x: hidden;
 }
 
 .container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: black;
+  padding-block: 2rem;
+  width: 100%;
+  /* z-index: 1; */
+}
+
+.card-container {
+  position: relative;
+  transition-duration: 300ms;
+  border: 4px solid #555555;
+  overflow: hidden;
+  border-radius: 1rem;
+  height: 16.25rem;
+  width: 23.5rem;
+  background-color: #555555;
+  padding: 1.25rem;
+  margin-block: 3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1rem;
+  transform: rotate3d(1, -1, 1, 60deg);
+}
+
+.card-container:hover {
+  transform: rotate(0deg);
+}
+
+.card-content {
+  position: relative;
+}
+
+.card-text {
+  color: #f3f4f6;
+}
+
+.card-title {
+  font-weight: bold;
+  font-size: 3rem;
+}
+
+.card-subtitle {
+  font-weight: bold;
+  font-size: 1.5rem;
+  margin-block-start: 0.5rem;
+}
+
+.card-button {
+  transition-duration: 300ms;
+  background-color: #f3f4f6;
+  border: 1px solid #0f3460;
+  color: #1e3a8a;
+  font-weight: 600;
+  padding: 0.75rem 0.8rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.card-button:hover {
+  background-color: #0f3460;
+  color: #f3f4f6;
+}
+
+.icon {
+  width: 1.5rem;
+  height: 1.5rem;
+  fill: currentColor;
+}
+
+.img-darwin {
+  position: absolute;
+  transition-duration: 500ms;
+  bottom: -7.8rem;
+  right: -15rem;
+  width: 17rem;
+  height: 17rem;
+  z-index: 10;
+  margin-top: -0.5rem;
+  fill: #f3f4f6;
+}
+
+.card-container:hover .card-svg {
+  transform: scale(1.25);
+}
+
+.card-svg-1 {
+  stroke: #0f3460;
+}
+
+.card-svg-2 {
+  transition-duration: 200ms;
+  stroke: #0369a1;
+}
+
+.line {
+  position: absolute;
+  top: 15rem;
+  width: 100%;
+}
+
+.line hr {
+  height: 1em;
+  border-color: #0f3460;
+  background-color: #0f3460;
+}
+
+.article-container {
     display: flex;
     justify-content: center;
     gap: 2em;
-    margin: 2em;
+    margin-block: 2em;
     width: 100vw;
 }
 
@@ -119,6 +229,23 @@ article:hover::after {
     100% {
         background-position: 0 0;
     }
+}
+
+.price-container {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(5px);
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0.5s, opacity 0.5s ease-in-out;
+  /* z-index: 0; */
+}
+
+.price-container.active {
+  visibility: visible;
+  opacity: 1;
 }
 
 .login-box {
