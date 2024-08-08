@@ -65,10 +65,13 @@ document.addEventListener('DOMContentLoaded', function() {
       if (container) {
           input = container.querySelector('input');
       }
-      if (input.value === "") {
-        input.value = 0.5;
-      }
-      if (input) {
+
+      let imanes = false;
+
+      if (input.id !== "cantidadADH" && input.id !== "cantidadVOL" && input.id !== "cantidadTAR") {
+          if (input.value === "") {
+            input.value = 1.0;
+          }
           let currentValue = parseFloat(input.value);
 
           // currentValue += 0.5;
@@ -80,8 +83,46 @@ document.addEventListener('DOMContentLoaded', function() {
             currentValue += 0.5;
           }
           input.value = currentValue.toFixed(1);
-          
+      } else if (input.id === "cantidadADH" && imanes) {
+          if (input.value === "") {
+            input.value = 0;
+          }
+          let currentValue = parseFloat(input.value);
 
+          // currentValue += 0.5;
+
+          const decimalPart = currentValue - Math.floor(currentValue);
+          if (decimalPart !== 0 && decimalPart !== 0.5) {
+            currentValue = roundToNearest(currentValue, decimalPart);
+          } else if (!decimalPart && currentValue !== 250 && currentValue !== 500 && currentValue !== 0) {
+            currentValue += 1000;
+          } else if (currentValue === 250) {
+            currentValue = 500;
+          } else if (currentValue === 500) {
+            currentValue = 1000;
+          }
+
+          if (currentValue === 0) {
+            currentValue = 250;
+          }
+
+          input.value = currentValue.toFixed(1);
+      } else {
+          if (input.value === "") {
+              input.value = 0;
+          }
+          let currentValue = parseFloat(input.value);
+
+          // currentValue += 0.5;
+
+          const decimalPart = currentValue - Math.floor(currentValue);
+          if (decimalPart !== 0 && decimalPart !== 0.5) {
+              currentValue = roundToNearest(currentValue, decimalPart);
+          } else if (!decimalPart) {
+              currentValue += 1000;
+          }
+
+          input.value = currentValue.toFixed(1);
       }
   }
 
@@ -92,9 +133,12 @@ document.addEventListener('DOMContentLoaded', function() {
       if (container) {
           input = container.querySelector('input');
       }
-      if (input) {
+
+      let imanes = false;
+
+      if (input.id !== "cantidadADH" && input.id !== "cantidadVOL" && input.id !== "cantidadTAR") {
         if (input.value === "") {
-          input.value = 0.0;
+          input.value = 1.0;
         }
           let currentValue = parseFloat(input.value);
           
@@ -105,10 +149,50 @@ document.addEventListener('DOMContentLoaded', function() {
             currentValue -= 0.5;
           }
 
-          if (currentValue <= 0) {
-              currentValue = 0;
+          if (currentValue <= 0 || currentValue === 0.5) {
+              currentValue = 1.0;
           }
           
+          input.value = currentValue.toFixed(1);
+      } else if (input.id === "cantidadADH" && imanes) {
+        if (input.value === "") {
+          input.value = 0;
+        }
+        let currentValue = parseFloat(input.value);
+
+        const decimalPart = currentValue - Math.floor(currentValue);
+        if (decimalPart !== 0 && decimalPart !== 0.5) {
+          currentValue = roundToNearest(currentValue, decimalPart);
+        } else if (!decimalPart && currentValue !== 250 && currentValue !== 500 && currentValue !== 1000) {
+          currentValue -= 1000;
+        } else if (currentValue === 1000) {
+          currentValue = 500;
+        } else if (currentValue === 500) {
+          currentValue = 250;
+        }
+
+        if (currentValue <= 0) {
+          currentValue = 250;
+        }
+
+        input.value = currentValue.toFixed(1);
+      } else {
+          if (input.value === "") {
+              input.value = 0;
+          }
+          let currentValue = parseFloat(input.value);
+
+          const decimalPart = currentValue - Math.floor(currentValue);
+          if (decimalPart !== 0 && decimalPart !== 0.5) {
+              currentValue = roundToNearest(currentValue, decimalPart);
+          } else if (!decimalPart) {
+              currentValue -= 1000;
+          }
+
+          if (currentValue <= 0) {
+              currentValue = 1000;
+          }
+
           input.value = currentValue.toFixed(1);
       }
   }
@@ -144,12 +228,15 @@ document.addEventListener('DOMContentLoaded', function() {
 
   CotizarADH.addEventListener('click', handleCotizarADH);
   function handleCotizarADH(event){
-    const ancho = parseFloat(document.getElementById('ancho').value);
-    const alto = parseFloat(document.getElementById('altura').value);
-    const cantidad = parseInt(document.getElementById('cantidad').value);
+    const ancho = parseFloat(document.getElementById('anchoADH').value);
+    const alto = parseFloat(document.getElementById('alturaADH').value);
+    let cantidad = parseInt(document.getElementById('cantidadADH').value);
 
     console.log(typeof(ancho));
     console.log(alto);
+
+    cantidad = cantidad/1000;
+
     console.log(cantidad);
 
     if (isNaN(ancho) || isNaN(alto) || isNaN(cantidad)) {
@@ -208,7 +295,7 @@ document.addEventListener('DOMContentLoaded', function() {
     console.log(precioTabla);
 
     if (precioTabla === 0) {
-      precioTotal = 20000;
+      precioTotal = 28000;
     } else {
       precioTotal = areaTotal * precioTabla;
     }
@@ -224,6 +311,44 @@ document.addEventListener('DOMContentLoaded', function() {
 
     console.log(precioTotal); 
 
-  };
+  }
 
-});
+CotizarTarjeta.addEventListener('click', handleCotizarADH);
+function handleCotizarADH(event) {
+    const ancho = parseFloat(document.getElementById('anchoTAR').value);
+    const alto = parseFloat(document.getElementById('alturaTAR').value);
+    let cantidad = parseInt(document.getElementById('cantidadTAR').value);
+
+    console.log(typeof (ancho));
+    console.log(alto);
+
+    cantidad = cantidad / 1000;
+
+    console.log(cantidad);
+
+    if (isNaN(ancho) || isNaN(alto) || isNaN(cantidad)) {
+        alert('Por favor, ingrese valores para la cantidad.');
+        return;
+    }
+
+    const areaTotal = ancho * alto * cantidad;
+
+    console.log(areaTotal);
+    let precioTabla = 38000;
+    let precioTotal;
+
+    precioTotal = precioTabla * areaTotal;
+
+    formContainerADH.classList.remove('active');
+
+    const totalContainer = document.getElementById('total-container');
+    const totalBlank = document.getElementById('totalBlank');
+
+    totalContainer.classList.add('active');
+
+    totalBlank.textContent = '$' + precioTotal;
+
+    console.log(precioTotal);
+}
+
+    });
