@@ -576,4 +576,12 @@ article:hover::after {
     .card-container {
         scale: 80%;
     }
+
+    .login-box {
+        width: 17em;
+    }
+
+    .login-box-iman {
+        width: 21em;
+    }
 }
