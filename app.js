@@ -3,12 +3,15 @@ document.addEventListener('DOMContentLoaded', function() {
   const articleADH = document.getElementById('ADH');
   const articleVol = document.getElementById('Vol');
   const articleTarjeta = document.getElementById('Tarjeta');
+  const articleIman = document.getElementById('Iman');
   const formContainerADH = document.getElementById('formContainerADH');
   const formContainerVol = document.getElementById('formContainerVol');
   const formContainerTarjeta = document.getElementById('formContainerTarjeta');
-  const loginboxADH = document.getElementById('login-boxADH');
-  const loginboxVol = document.getElementById('login-boxVol');
-  const loginboxTarjeta = document.getElementById('login-boxTarjeta');
+  const formContainerIman = document.getElementById('formContainerIman');
+  const loginBoxADH = document.getElementById('login-boxADH');
+  const loginBoxVol = document.getElementById('login-boxVol');
+  const loginBoxTarjeta = document.getElementById('login-boxTarjeta');
+  const loginBoxIman = document.getElementById('login-boxIman');
 
   function handleArticleADHClick(event) {
     formContainerADH.classList.add('active');
@@ -20,35 +23,48 @@ document.addEventListener('DOMContentLoaded', function() {
 
   function handleArticleTarjetaClick(event) {
     formContainerTarjeta.classList.add('active');
-}
+  }
+
+    function handleArticleImanClick(event) {
+        formContainerIman.classList.add('active');
+    }
 
   function handleClickOutsideADH(event) {
-    if (!loginboxADH.contains(event.target) && formContainerADH.contains(event.target)) {
+    if (!loginBoxADH.contains(event.target) && formContainerADH.contains(event.target)) {
       formContainerADH.classList.remove('active');
     }
   }
 
   function handleClickOutsideVol(event) {
-    if (!loginboxVol.contains(event.target) && formContainerVol.contains(event.target)) {
+    if (!loginBoxVol.contains(event.target) && formContainerVol.contains(event.target)) {
       formContainerVol.classList.remove('active');
     }
   }
 
   function handleClickOutsideTarjeta(event) {
-    if (!loginboxTarjeta.contains(event.target) && formContainerTarjeta.contains(event.target)) {
+    if (!loginBoxTarjeta.contains(event.target) && formContainerTarjeta.contains(event.target)) {
       formContainerTarjeta.classList.remove('active');
     }
   }
 
+    function handleClickOutsideIman(event) {
+        if (!loginBoxIman.contains(event.target) && formContainerIman.contains(event.target)) {
+            formContainerIman.classList.remove('active');
+        }
+    }
+
   formContainerADH.addEventListener('click', handleClickOutsideADH);
-  formContainerVol.addEventListener('click', handleClickOutsideVol);
-  formContainerTarjeta.addEventListener('click', handleClickOutsideTarjeta);
+  // formContainerVol.addEventListener('click', handleClickOutsideVol);
+  // formContainerTarjeta.addEventListener('click', handleClickOutsideTarjeta);
+    formContainerIman.addEventListener('click', handleClickOutsideIman);
 
   articleADH.addEventListener('click', handleArticleADHClick);
-  articleVol.addEventListener('click', handleArticleVolClick);
-  articleTarjeta.addEventListener('click', handleArticleTarjetaClick);
+  articleIman.addEventListener('click', handleArticleImanClick);
+  // articleVol.addEventListener('click', handleArticleVolClick);
+  // articleTarjeta.addEventListener('click', handleArticleTarjetaClick);
 
   const tarjetaImg = document.getElementById('ImgTarjeta');
+  const imanImg = document.getElementById('ImgImanes');
 
   articleTarjeta.addEventListener('mouseover', function() {
     tarjetaImg.src = 'src/tarjeta2CaraEdit.jpeg'; // Cambia a la imagen deseada
@@ -56,6 +72,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
   articleTarjeta.addEventListener('mouseout', function() {
     tarjetaImg.src = 'src/tarjetaEdit.jpeg'; // Vuelve a la imagen original
+  });
+
+  articleIman.addEventListener('mouseover', function() {
+      imanImg.src = 'src/grupo_imanes.jfif'; // Cambia a la imagen deseada
+  });
+
+  articleIman.addEventListener('mouseout', function() {
+      imanImg.src = 'src/allrock_iman.jfif'; // Vuelve a la imagen original
   });
 
   function handleClickUp(event) {
@@ -223,7 +247,7 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 
   const CotizarADH = document.getElementById('cotizarADH');
-  const CotizarVOL = document.getElementById('cotizarVol');
+  // const CotizarVOL = document.getElementById('cotizarVol');
   const CotizarTarjeta = document.getElementById('cotizarADH');
 
   CotizarADH.addEventListener('click', handleCotizarADH);
@@ -312,43 +336,43 @@ document.addEventListener('DOMContentLoaded', function() {
     console.log(precioTotal); 
 
   }
-
-CotizarTarjeta.addEventListener('click', handleCotizarADH);
-function handleCotizarADH(event) {
-    const ancho = parseFloat(document.getElementById('anchoTAR').value);
-    const alto = parseFloat(document.getElementById('alturaTAR').value);
-    let cantidad = parseInt(document.getElementById('cantidadTAR').value);
-
-    console.log(typeof (ancho));
-    console.log(alto);
-
-    cantidad = cantidad / 1000;
-
-    console.log(cantidad);
-
-    if (isNaN(ancho) || isNaN(alto) || isNaN(cantidad)) {
-        alert('Por favor, ingrese valores para la cantidad.');
-        return;
-    }
-
-    const areaTotal = ancho * alto * cantidad;
-
-    console.log(areaTotal);
-    let precioTabla = 38000;
-    let precioTotal;
-
-    precioTotal = precioTabla * areaTotal;
-
-    formContainerADH.classList.remove('active');
-
-    const totalContainer = document.getElementById('total-container');
-    const totalBlank = document.getElementById('totalBlank');
-
-    totalContainer.classList.add('active');
-
-    totalBlank.textContent = '$' + precioTotal;
-
-    console.log(precioTotal);
-}
+//
+// CotizarTarjeta.addEventListener('click', handleCotizarTarjeta);
+// function handleCotizarTarjeta(event) {
+//     const ancho = parseFloat(document.getElementById('anchoTAR').value);
+//     const alto = parseFloat(document.getElementById('alturaTAR').value);
+//     let cantidad = parseInt(document.getElementById('cantidadTAR').value);
+//
+//     console.log(typeof (ancho));
+//     console.log(alto);
+//
+//     cantidad = cantidad / 1000;
+//
+//     console.log(cantidad);
+//
+//     if (isNaN(ancho) || isNaN(alto) || isNaN(cantidad)) {
+//         alert('Por favor, ingrese valores para la cantidad.');
+//         return;
+//     }
+//
+//     const areaTotal = ancho * alto * cantidad;
+//
+//     console.log(areaTotal);
+//     let precioTabla = 38000;
+//     let precioTotal;
+//
+//     precioTotal = precioTabla * areaTotal;
+//
+//     formContainerADH.classList.remove('active');
+//
+//     const totalContainer = document.getElementById('total-container');
+//     const totalBlank = document.getElementById('totalBlank');
+//
+//     totalContainer.classList.add('active');
+//
+//     totalBlank.textContent = '$' + precioTotal;
+//
+//     console.log(precioTotal);
+// }
 
     });
